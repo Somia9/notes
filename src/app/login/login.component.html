@@ -1,0 +1,31 @@
+<div id="signin" class="vh-100 bg-dark">
+  <div class="container w-50">
+    <div *ngIf="errorMessage" class="alert alert-danger text-dark" >
+      {{errorMessage}}
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="signUp(loginForm)">
+
+
+
+
+
+
+      <input type="email" class="form-control my-2 " formControlName="email" placeholder="enter your email">
+      <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched">
+        <p *ngIf="loginForm.get('email')?.getError('required')" class="text-danger fw-bolder">email is required</p>
+        <p *ngIf="loginForm.get('email')?.getError('email')" class="text-danger fw-bolder ">email invalid</p>
+
+      </div>
+      <input type="password" class="form-control my-2" formControlName="password" placeholder="enter your password">
+      <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+        <p *ngIf="loginForm.get('password')?.getError('required')" class="text-danger m-2">password is required</p>
+
+      </div>
+      <button [disabled]="loginForm.invalid" class="btn btn-light my-3" type="submit" >
+        <span *ngIf="isLoading">LOODING...</span>
+        <span *ngIf="!isLoading">LOGIN</span>
+      </button>
+
+    </form>
+  </div>
+</div>

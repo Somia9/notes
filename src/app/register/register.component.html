@@ -1,0 +1,54 @@
+<div id="signin" class="vh-100 bg-dark">
+  <div class="container w-50">
+
+        <div *ngIf="errorMessage" class="alert alert-danger text-dark" >
+          {{errorMessage}}
+        </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="signUp(registerForm)">
+
+        <input type="text" class="form-control my-2 col-md-6" formControlName="first_name" placeholder="enter your first_name">
+        <div *ngIf="registerForm.get('first_name')?.errors && registerForm.get('first_name')?.touched" class="">
+          <p *ngIf="registerForm.get('first_name')?.getError('required')" class="text-danger fw-bolder">first_name is required</p>
+          <p *ngIf="registerForm.get('first_name')?.getError('minlength')" class="text-danger fw-bolder">minLength is 3 char</p>
+          <p *ngIf="registerForm.get('first_name')?.getError('maxlength')" class="text-danger fw-bolder">maxLength is 8 char</p>
+        </div>
+
+        <input type="text" class="form-control my-2  col-md-6" formControlName="last_name" placeholder="enter your last_name">
+
+        <div *ngIf="registerForm.get('last_name')?.errors && registerForm.get('last_name')?.touched">
+          <p *ngIf="registerForm.get('last_name')?.getError('required')" class="text-danger fw-bolder">last_name is required</p>
+          <p *ngIf="registerForm.get('last_name')?.getError('minlength')" class="text-danger fw-bolder">minLength is 3 char</p>
+          <p *ngIf="registerForm.get('last_name')?.getError('maxlength')" class="text-danger fw-bolder">maxLength is 8 char</p>
+
+        </div>
+
+      <input type="number" class="form-control my-2 " formControlName="age" placeholder="enter your age">
+      <div *ngIf="registerForm.get('age')?.errors && registerForm.get('age')?.touched">
+        <p *ngIf="registerForm.get('age')?.getError('required')" class="text-danger fw-bolder">age is required</p>
+        <p *ngIf="registerForm.get('age')?.getError('min')" class="text-danger fw-bolder">min is 6 char</p>
+        <p *ngIf="registerForm.get('age')?.getError('max')" class="text-danger fw-bolder">max is 80 char</p>
+
+      </div>
+      <input type="email" class="form-control my-2 " formControlName="email" placeholder="enter your email">
+      <div *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+        <p *ngIf="registerForm.get('email')?.getError('required')" class="text-danger fw-bolder">email is required</p>
+        <p *ngIf="registerForm.get('email')?.getError('email')" class="text-danger fw-bolder">email invalid</p>
+
+      </div>
+      <input type="password" class="form-control my-2" formControlName="password" placeholder="enter your password">
+      <div *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+        <p *ngIf="registerForm.get('password')?.getError('required')" class="text-danger fw-bolder">password is required</p>
+
+      </div>
+      <button [disabled]="registerForm.invalid" class="btn btn-light my-3" type="submit">
+        <span *ngIf="isLoading">LOODING...</span>
+        <span *ngIf="!isLoading">REGISTER</span>
+      </button>
+
+    </form>
+  </div>
+</div>
+
+
+
